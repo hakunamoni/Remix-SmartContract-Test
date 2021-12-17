@@ -11,7 +11,7 @@ contract Campaign {
     }
 
     function contribute() public payable {
-        requie(msg.value > minimumContribution);
+        require(msg.value > minimumContribution);
 
         approvers.push(msg.sender);
     }
