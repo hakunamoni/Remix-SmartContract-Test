@@ -40,6 +40,8 @@ contract Campaign {
             complete: false
         });
 
+        // Request(description, value, recipient, false);
+
         requests.push(newRequest);
     }
 }
