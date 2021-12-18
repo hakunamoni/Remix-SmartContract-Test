@@ -7,13 +7,19 @@ contract Numbers {
         numbers.push(20);
         numbers.push(32);
 
-        // int[] storage myArray = numbers;
-        // myArray[0] = 3;
-        // // numbers : [3,32]
-
-        int[] memory myArray = numbers;
-        myArray[0] = 3;
-        // numbers : [20,32]
-
+        changeArray(numbers);
     }
-}S
+
+    // function changeArray(int[] myArray) private {
+    //     myArray[0] = 1;
+    // }
+    // function changeArray(int[] memory myArray) private {
+    //     myArray[0] = 1;
+    // }
+    // by default, it's set 'memory' for parameter and the above 2 functions are same, also no change on 'numbers' variable
+
+    // if "numbers" variable should be changed, set int[] storage like the following
+    function changeArray(int[] storage myArray) private {
+        myArray[0] = 1;
+    }
+}
