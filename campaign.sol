@@ -6,7 +6,6 @@ contract Campaign {
         uint value;
         address recipient;
         bool complete;
-
     }
 
     Request[] public requests;
@@ -33,15 +32,16 @@ contract Campaign {
     function createRequest(string description, uint value, address recipient) 
         public restricted 
     {
-        Request newRequest = Request({
+        Request memory newRequest = Request({
             description: description,
             value: value,
             recipient: recipient,
             complete: false
         });
 
-        // Request(description, value, recipient, false);
-
         requests.push(newRequest);
     }
+
+    // arguments to the functions are technically 'memory' data
+    // public variables of the contract are technically 'storage' data
 }
