@@ -13,7 +13,7 @@ contract Campaign {
     Request[] public requests;
     address public manager;
     uint public minimumContribution;
-    mapping(address => boolean) public approvers;
+    mapping(address => bool) public approvers;
 
     modifier restricted() {
         require(msg.sender == manager);
@@ -45,17 +45,14 @@ contract Campaign {
         requests.push(newRequest);
     }
 
-    // index : "request" id
     function approveRequest(uint index) public {
         Request storage request = requests[index];
 
-        // make sure person has donated (check contributor)
         require(approvers[msg.sender]);
 
-        // make sure person hasn't voted before
         require(!request.approvals[msg.sender]);
 
         request.approvals[msg.sender] = true;
-        request.approveCount++;
+        request.approvalCount++;
     }
 }
