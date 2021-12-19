@@ -34,8 +34,6 @@ contract Campaign {
     function createRequest(string description, uint value, address recipient) 
         public restricted 
     {
-        require(approvers[msg.sender]);
-
         Request memory newRequest = Request({
             description: description,
             value: value,
@@ -43,8 +41,21 @@ contract Campaign {
             complete: false,
             approvalCount: 0
         });
-        // only initialize the value types like above and don't initilie the reference types like "mapping"
         
         requests.push(newRequest);
+    }
+
+    // index : "request" id
+    function approveRequest(uint index) public {
+        Request storage request = requests[index];
+
+        // make sure person has donated (check contributor)
+        require(approvers[msg.sender]);
+
+        // make sure person hasn't voted before
+        require(!request.approvals[msg.sender]);
+
+        request.approvals[msg.sender] = true;
+        request.approveCount++;
     }
 }
